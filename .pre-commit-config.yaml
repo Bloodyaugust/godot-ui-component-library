@@ -1,0 +1,14 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/Scony/godot-gdscript-toolkit
+    rev: 4.1.0
+    hooks:
+      - id: gdformat
+        name: gdformat
+        description: "gdformat - formatter for GDScript"
+        entry: gdformat
+        language: python
+        language_version: python3
+        require_serial: true
+        types: [gdscript]

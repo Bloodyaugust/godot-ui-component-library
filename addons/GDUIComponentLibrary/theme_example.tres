@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://5ba352v0i6fa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrb0"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk71l"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wpgws"]
+color = Color(0.145098, 0.145098, 0.145098, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 12
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxFlat_onrb0")
+Button/styles/normal = SubResource("StyleBoxFlat_fk71l")
+HSeparator/styles/separator = SubResource("StyleBoxLine_wpgws")
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 5
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
