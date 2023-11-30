@@ -20,6 +20,7 @@ All components are built internally using base Godot `Control` nodes. This means
 Components are added to the "Create New Node" modal, so can be added right to your scene tree like other `Control` nodes.
 
 - [Single Select](#single-select)
+- [Single Select Search](#single-select-search)
 
 ### Single Select
 
