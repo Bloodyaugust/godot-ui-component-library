@@ -28,6 +28,7 @@ Extends `PanelContainer`.
 #### Variable Interface
 
 `options`: `Array[String]` of selectable options. Shown when the input is expanded.
+`option_scene`: `Path || null` is `load`ed when set, if not `null`. Allows for customizing how options are rendered. When set, `option_scene` should be the path to a `PackedScene`, and that scene should implement a `text: String` property as well as a `pressed` signal.
 `expand_icon`: `Texture2D` shown when the input is collapsed.
 `collapse_icon`: `Texture2D` shown when the input is expanded.
 `button_custom_minimum_size`: `Vector2` applied as a `custom_minimum_size` for the root button component. Especially useful for controlling the minimum height.
@@ -47,5 +48,5 @@ Extends `PanelContainer`.
       - `PanelContainer`
         - `CanvasLayer` - used so the dropdown is shown over other layout elements, instead of expanding the size of the root parent
           - `VBoxContainer`
-            - `Button` - one for each `option`
+            - `Button || option_scene` - one for each `option`
             - `HSeparator` - one between each `option`

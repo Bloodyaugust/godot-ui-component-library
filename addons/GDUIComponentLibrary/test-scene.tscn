@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbm80agmp5u2b"]
+[gd_scene load_steps=4 format=3 uid="uid://dbm80agmp5u2b"]
 
 [ext_resource type="Theme" uid="uid://5ba352v0i6fa" path="res://addons/GDUIComponentLibrary/theme_example.tres" id="1_aoikk"]
 [ext_resource type="Script" path="res://addons/GDUIComponentLibrary/components/SingleSelect.gd" id="1_sdaml"]
+[ext_resource type="PackedScene" uid="uid://ddxifiqkhm3ix" path="res://addons/GDUIComponentLibrary/example-resources/CustomOption.tscn" id="3_qk2mo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -34,6 +35,10 @@ columns = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "Single Select"
+
 [node name="SingleSelect" type="PanelContainer" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -44,3 +49,25 @@ options = Array[String](["test-1", "test-2"])
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options cover me"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Single Select with custom options scene"
+
+[node name="SingleSelect2" type="PanelContainer" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_aoikk")
+script = ExtResource("1_sdaml")
+options = Array[String](["custom-test-1", "custom-test-2"])
+option_scene = ExtResource("3_qk2mo")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+text = "I have custom options rendering using an HBoxContainer with a label to the left"
+autowrap_mode = 3

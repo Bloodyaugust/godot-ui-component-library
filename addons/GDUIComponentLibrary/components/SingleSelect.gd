@@ -15,22 +15,16 @@ var expand_icon: Texture2D = preload("res://addons/GDUIComponentLibrary/icons/ch
 @export var options: Array[String] = []:
 	set(new_options):
 		options = new_options
+		_render_options()
+@export_file() var option_scene: Variant = null:
+	set(new_option_scene):
+		if new_option_scene is String:
+			option_scene = load(new_option_scene)
+		else:
+			option_scene = new_option_scene
 
-		for child in options_container.get_children():
-			if child is Button:
-				if child.is_connected("pressed", _on_option_selected):
-					child.pressed.disconnect(_on_option_selected)
-			child.queue_free()
-
-		for option_index in len(options):
-			var new_label: Button = Button.new()
-
-			new_label.text = options[option_index]
-			new_label.pressed.connect(func(): _on_option_selected(options[option_index]))
-
-			options_container.add_child(new_label)
-			if option_index < options.size() - 1:
-				options_container.add_child(HSeparator.new())
+		if show_options:
+			_render_options()
 @export var selected_option: String = "":
 	set(new_selected_option):
 		selected_option = new_selected_option
@@ -41,6 +35,7 @@ var expand_icon: Texture2D = preload("res://addons/GDUIComponentLibrary/icons/ch
 		show_options = new_show_options
 
 		if show_options:
+			_render_options()
 			options_container.position = _get_options_container_position()
 			options_container.custom_minimum_size = _get_options_container_size()
 			options_container.visible = true
@@ -65,7 +60,6 @@ func _get_options_container_position() -> Vector2:
 
 
 func _get_options_container_size() -> Vector2:
-	print(Vector2(size.x, 0))
 	return Vector2(size.x, 0)
 
 
@@ -77,6 +71,25 @@ func _on_option_selected(option: String) -> void:
 	selected_option = option
 	button.text = option
 	option_selected.emit(option)
+
+
+func _render_options() -> void:
+	for child in options_container.get_children():
+		if child.has_signal("pressed") and child.is_connected("pressed", _on_option_selected):
+			child.pressed.disconnect(_on_option_selected)
+		child.queue_free()
+
+	for option_index in len(options):
+		var new_option_component: Variant = (
+			option_scene.instantiate() if option_scene else Button.new()
+		)
+
+		new_option_component.text = options[option_index]
+		new_option_component.pressed.connect(func(): _on_option_selected(options[option_index]))
+
+		options_container.add_child(new_option_component)
+		if option_index < options.size() - 1:
+			options_container.add_child(HSeparator.new())
 
 
 func _init():

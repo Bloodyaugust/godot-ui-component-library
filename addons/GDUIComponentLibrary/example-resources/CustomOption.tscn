@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddxifiqkhm3ix"]
+
+[ext_resource type="Script" path="res://addons/GDUIComponentLibrary/example-resources/CustomOption.gd" id="1_7f30y"]
+
+[node name="CustomOption" type="HBoxContainer"]
+script = ExtResource("1_7f30y")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "- "
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
