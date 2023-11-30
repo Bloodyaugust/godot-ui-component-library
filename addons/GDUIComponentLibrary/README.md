@@ -8,6 +8,38 @@ Add the plugin as normal, and enable in project settings.
 
 ## Components
 
+All components are built internally using base Godot `Control` nodes. This means components can be styled using their `theme` property. Any cases where a component uses a `CanvasLayer` internally (to pull it out of the parent layout, for things like overlapping UI elements), this is worked around by passing the theme to the root child(ren) of that `CanvasLayer` when `theme` changes.
+
+Components are added to the "Create New Node" modal, so can be added right to your scene tree like other `Control` nodes.
+
+- [Single Select](#single-select)
+
 ### Single Select
 
 Allows you to provide a list of options, and have the user select them from a collapsible dropdown list.
+
+Extends `PanelContainer`.
+
+#### Variable Interface
+
+`options`: `Array[String]` of selectable options. Shown when the input is expanded.
+`expand_icon`: `Texture2D` shown when the input is collapsed.
+`collapse_icon`: `Texture2D` shown when the input is expanded.
+`button_custom_minimum_size`: `Vector2` applied as a `custom_minimum_size` for the root button component. Especially useful for controlling the minimum height.
+`selected_option`: `String` is the option selected by the user, or set in code. Displayed as the text of the root button component.
+
+#### Signals
+
+`option_selected(option: String)`: emitted when the user selects an option. Is not emitted when `selected_option` is set in code.
+
+#### Internal Tree
+
+- `PanelContainer`
+  - `MarginContainer`
+    - `VBoxContainer`
+      - `HBoxContainer`
+        - `Button` - the button the user clicks to expand the dropdown, also shows the `selected_option`
+      - `PanelContainer`
+        - `CanvasLayer` - used so the dropdown is shown over other layout elements, instead of expanding the size of the root parent
+          - `VBoxContainer`
+            - `Label` - one for each `option`

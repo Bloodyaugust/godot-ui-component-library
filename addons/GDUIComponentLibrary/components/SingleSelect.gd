@@ -41,14 +41,12 @@ var expand_icon: Texture2D = preload("res://addons/GDUIComponentLibrary/icons/ch
 		show_options = new_show_options
 
 		if show_options:
-			options_container.position = button_container.position + Vector2(0, size.y + 5)
-			print(size)
+			options_container.position = _get_options_container_position()
+			options_container.custom_minimum_size = _get_options_container_size()
 			options_container.visible = true
-			root_container_spacer.visible = true
 			button.icon = collapse_icon
 		else:
 			options_container.visible = false
-			root_container_spacer.visible = false
 			button.icon = expand_icon
 
 var button: Button = Button.new()
@@ -58,7 +56,17 @@ var options_container: VBoxContainer = VBoxContainer.new()
 var options_container_canvas_layer: CanvasLayer = CanvasLayer.new()
 var options_container_container: PanelContainer = PanelContainer.new()
 var root_container: VBoxContainer = VBoxContainer.new()
-var root_container_spacer: Control
+
+
+func _get_options_container_position() -> Vector2:
+	return Vector2(
+		inner_margin_container.global_position.x, button_container.global_position.y + size.y
+	)
+
+
+func _get_options_container_size() -> Vector2:
+	print(Vector2(size.x, 0))
+	return Vector2(size.x, 0)
 
 
 func _on_button_pressed() -> void:
@@ -81,9 +89,9 @@ func _init():
 	button.expand_icon = true
 	button.icon = expand_icon
 	button.custom_minimum_size = button_custom_minimum_size
-	options_container.custom_minimum_size = Vector2(button_custom_minimum_size.x, 0)
+	options_container.custom_minimum_size = _get_options_container_size()
 	options_container.theme = theme
-	options_container.position = button_container.position + Vector2(0, size.y + 5)
+	options_container.position = _get_options_container_position()
 
 	options_container.visible = false
 
@@ -93,8 +101,6 @@ func _init():
 	inner_margin_container.add_child(root_container)
 	root_container.add_child(button_container)
 	button_container.add_child(button)
-	root_container_spacer = root_container.add_spacer(false)
-	root_container_spacer.visible = false
 	root_container.add_child(options_container_container)
 	options_container_container.add_child(options_container_canvas_layer)
 	options_container_canvas_layer.add_child(options_container)
