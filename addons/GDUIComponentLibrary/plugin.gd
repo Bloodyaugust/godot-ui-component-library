@@ -9,6 +9,12 @@ func _enter_tree():
 		preload("res://addons/GDUIComponentLibrary/components/SingleSelect.gd"),
 		preload("res://addons/GDUIComponentLibrary/icons/icon-select.png")
 	)
+	add_custom_type(
+		"SingleSelectSearch",
+		"PanelContainer",
+		preload("res://addons/GDUIComponentLibrary/components/SingleSelectSearch.gd"),
+		preload("res://addons/GDUIComponentLibrary/icons/icon-select.png")
+	)
 
 
 func _exit_tree():

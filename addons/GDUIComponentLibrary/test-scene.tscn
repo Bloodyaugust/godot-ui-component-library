@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbm80agmp5u2b"]
+[gd_scene load_steps=5 format=3 uid="uid://dbm80agmp5u2b"]
 
 [ext_resource type="Theme" uid="uid://5ba352v0i6fa" path="res://addons/GDUIComponentLibrary/theme_example.tres" id="1_aoikk"]
 [ext_resource type="Script" path="res://addons/GDUIComponentLibrary/components/SingleSelect.gd" id="1_sdaml"]
 [ext_resource type="PackedScene" uid="uid://ddxifiqkhm3ix" path="res://addons/GDUIComponentLibrary/example-resources/CustomOption.tscn" id="3_qk2mo"]
+[ext_resource type="Script" path="res://addons/GDUIComponentLibrary/components/SingleSelectSearch.gd" id="4_dsb86"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -29,7 +30,8 @@ theme_override_constants/margin_bottom = 15
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-columns = 3
+theme_override_constants/v_separation = 50
+columns = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -71,3 +73,32 @@ custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 text = "I have custom options rendering using an HBoxContainer with a label to the left"
 autowrap_mode = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Single Select Search"
+
+[node name="SingleSelectSearch" type="PanelContainer" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_aoikk")
+script = ExtResource("4_dsb86")
+options = Array[String](["test-1", "test-2"])
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Single Select Search with custom options scene"
+
+[node name="SingleSelectSearch" type="PanelContainer" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_aoikk")
+script = ExtResource("4_dsb86")
+options = Array[String](["test-1", "test-2"])
+option_scene = ExtResource("3_qk2mo")

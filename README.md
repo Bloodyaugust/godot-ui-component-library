@@ -13,6 +13,8 @@ Add the plugin as normal, and enable in project settings.
 
 ## Components
 
+![Components](./screenshots/all-components.png?raw=true "Components")
+
 All components are built internally using base Godot `Control` nodes. This means components can be styled using their `theme` property. Any cases where a component uses a `CanvasLayer` internally (to pull it out of the parent layout, for things like overlapping UI elements), this is worked around by passing the theme to the root child(ren) of that `CanvasLayer` when `theme` changes.
 
 Components are added to the "Create New Node" modal, so can be added right to your scene tree like other `Control` nodes.
@@ -50,6 +52,46 @@ Extends `PanelContainer`.
     - `VBoxContainer`
       - `HBoxContainer`
         - `Button` - the button the user clicks to expand the dropdown, also shows the `selected_option`
+      - `PanelContainer`
+        - `CanvasLayer` - used so the dropdown is shown over other layout elements, instead of expanding the size of the root parent
+          - `VBoxContainer`
+            - `Button || option_scene` - one for each `option`
+            - `HSeparator` - one between each `option`
+
+### Single Select Search
+
+Like a single select, but allows the user to do case-insensitive search to filter options.
+
+![Single Select Search](./screenshots/single-select-search-1.png?raw=true "Single Select Search")
+
+Extends `PanelContainer`.
+
+#### Variable Interface
+
+`options`: `Array[String]` of selectable options. Shown when the input is expanded.
+
+`option_scene`: `Path || null` is `load`ed when set, if not `null`. Allows for customizing how options are rendered. When set, `option_scene` should be the path to a `PackedScene`, and that scene should implement a `text: String` property as well as a `pressed` signal.
+
+`expand_icon`: `Texture2D` shown when the input is collapsed.
+
+`collapse_icon`: `Texture2D` shown when the input is expanded.
+
+`search_custom_minimum_size`: `Vector2` applied as a `custom_minimum_size` for the root `LineEdit` component. Especially useful for controlling the minimum height.
+
+`selected_option`: `String` is the option selected by the user, or set in code. Displayed as the text of the root `LineEdit` component.
+
+#### Signals
+
+`option_selected(option: String)`: emitted when the user selects an option. Is not emitted when `selected_option` is set in code.
+
+#### Internal Tree
+
+- `PanelContainer`
+  - `MarginContainer`
+    - `VBoxContainer`
+      - `HBoxContainer`
+        - `LineEdit` - the `LineEdit` the user focuses to expand the dropdown and filter options, also shows the `selected_option` once one is selected
+        - `TextureRect` - used to display the expand/collapse icon
       - `PanelContainer`
         - `CanvasLayer` - used so the dropdown is shown over other layout elements, instead of expanding the size of the root parent
           - `VBoxContainer`
