@@ -25,6 +25,9 @@ Components are added to the "Create New Node" modal, so can be added right to yo
 
 Allows you to provide a list of options, and have the user select them from a collapsible dropdown list.
 
+![Single Select Closed](./screenshots/single-select-1.png?raw=true "Closed")
+![Single Select Open](./screenshots/single-select-2.png?raw=true "Open")
+
 Extends `PanelContainer`.
 
 #### Variable Interface
