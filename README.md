@@ -28,10 +28,15 @@ Extends `PanelContainer`.
 #### Variable Interface
 
 `options`: `Array[String]` of selectable options. Shown when the input is expanded.
+
 `option_scene`: `Path || null` is `load`ed when set, if not `null`. Allows for customizing how options are rendered. When set, `option_scene` should be the path to a `PackedScene`, and that scene should implement a `text: String` property as well as a `pressed` signal.
+
 `expand_icon`: `Texture2D` shown when the input is collapsed.
+
 `collapse_icon`: `Texture2D` shown when the input is expanded.
+
 `button_custom_minimum_size`: `Vector2` applied as a `custom_minimum_size` for the root button component. Especially useful for controlling the minimum height.
+
 `selected_option`: `String` is the option selected by the user, or set in code. Displayed as the text of the root button component.
 
 #### Signals
