@@ -47,4 +47,5 @@ Extends `PanelContainer`.
       - `PanelContainer`
         - `CanvasLayer` - used so the dropdown is shown over other layout elements, instead of expanding the size of the root parent
           - `VBoxContainer`
-            - `Label` - one for each `option`
+            - `Button` - one for each `option`
+            - `HSeparator` - one between each `option`
