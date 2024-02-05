@@ -25,6 +25,11 @@ var expand_icon: Texture2D = preload("res://addons/GDUIComponentLibrary/icons/ch
 
 		if show_options:
 			_render_options()
+@export var option_scroll_height: float = 100:
+	set(new_option_scroll_height):
+		if show_options:
+			options_scroll_container.size = _get_options_container_size()
+			_render_options()
 @export var selected_option: String = "":
 	set(new_selected_option):
 		selected_option = new_selected_option
@@ -36,12 +41,12 @@ var expand_icon: Texture2D = preload("res://addons/GDUIComponentLibrary/icons/ch
 
 		if show_options:
 			_render_options()
-			options_container.position = _get_options_container_position()
-			options_container.custom_minimum_size = _get_options_container_size()
-			options_container.visible = true
+			options_scroll_container.position = _get_options_container_position()
+			options_scroll_container.size = _get_options_container_size()
+			options_scroll_container.visible = true
 			button.icon = collapse_icon
 		else:
-			options_container.visible = false
+			options_scroll_container.visible = false
 			button.icon = expand_icon
 
 var button: Button = Button.new()
@@ -50,17 +55,16 @@ var inner_margin_container: MarginContainer = MarginContainer.new()
 var options_container: VBoxContainer = VBoxContainer.new()
 var options_container_canvas_layer: CanvasLayer = CanvasLayer.new()
 var options_container_container: PanelContainer = PanelContainer.new()
+var options_scroll_container: ScrollContainer = ScrollContainer.new()
 var root_container: VBoxContainer = VBoxContainer.new()
 
 
 func _get_options_container_position() -> Vector2:
-	return Vector2(
-		inner_margin_container.global_position.x, button_container.global_position.y + size.y
-	)
+	return Vector2(inner_margin_container.global_position.x, global_position.y + size.y)
 
 
 func _get_options_container_size() -> Vector2:
-	return Vector2(size.x, 0)
+	return Vector2(size.x, option_scroll_height)
 
 
 func _on_button_pressed() -> void:
@@ -102,11 +106,13 @@ func _init():
 	button.expand_icon = true
 	button.icon = expand_icon
 	button.custom_minimum_size = button_custom_minimum_size
-	options_container.custom_minimum_size = _get_options_container_size()
-	options_container.theme = theme
-	options_container.position = _get_options_container_position()
+	options_scroll_container.size = _get_options_container_size()
+	options_scroll_container.theme = theme
+	options_scroll_container.position = _get_options_container_position()
+	options_scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	options_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-	options_container.visible = false
+	options_scroll_container.visible = false
 
 	button.pressed.connect(_on_button_pressed)
 
@@ -116,4 +122,5 @@ func _init():
 	button_container.add_child(button)
 	root_container.add_child(options_container_container)
 	options_container_container.add_child(options_container_canvas_layer)
-	options_container_canvas_layer.add_child(options_container)
+	options_container_canvas_layer.add_child(options_scroll_container)
+	options_scroll_container.add_child(options_container)

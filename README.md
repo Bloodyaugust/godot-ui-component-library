@@ -36,6 +36,8 @@ Extends `PanelContainer`.
 
 `option_scene`: `Path || null` is `load`ed when set, if not `null`. Allows for customizing how options are rendered. When set, `option_scene` should be the path to a `PackedScene`, and that scene should implement a `text: String` property as well as a `pressed` signal.
 
+`option_scroll_height`: `float` height of scroll container for options, defaults to 100px.
+
 `expand_icon`: `Texture2D` shown when the input is collapsed.
 
 `collapse_icon`: `Texture2D` shown when the input is expanded.
@@ -57,9 +59,10 @@ Extends `PanelContainer`.
         - `Button` - the button the user clicks to expand the dropdown, also shows the `selected_option`
       - `PanelContainer`
         - `CanvasLayer` - used so the dropdown is shown over other layout elements, instead of expanding the size of the root parent
-          - `VBoxContainer`
-            - `Button || option_scene` - one for each `option`
-            - `HSeparator` - one between each `option`
+          - `ScrollContainer` - set to auto on vertical scroll, horizontal scroll off, defaults to 100px height
+            - `VBoxContainer`
+              - `Button || option_scene` - one for each `option`
+              - `HSeparator` - one between each `option`
 
 ### Single Select Search
 

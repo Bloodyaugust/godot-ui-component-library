@@ -46,7 +46,8 @@ layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("1_aoikk")
 script = ExtResource("1_sdaml")
-options = Array[String](["test-1", "test-2"])
+options = Array[String](["test-1", "test-2", "test-3", "test-4", "test-5"])
+option_scroll_height = null
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
@@ -67,6 +68,7 @@ theme = ExtResource("1_aoikk")
 script = ExtResource("1_sdaml")
 options = Array[String](["custom-test-1", "custom-test-2"])
 option_scene = ExtResource("3_qk2mo")
+option_scroll_height = null
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(10, 10)
@@ -102,3 +104,7 @@ theme = ExtResource("1_aoikk")
 script = ExtResource("4_dsb86")
 options = Array[String](["test-1", "test-2"])
 option_scene = ExtResource("3_qk2mo")
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Single Select Search with custom options scene"
